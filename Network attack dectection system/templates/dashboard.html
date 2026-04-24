@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Attack Detection System - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Network Attack Detection System</h1>
+            <div class="header-status">
+                <span id="system-status" class="status-badge">Initializing...</span>
+                <span id="last-update">Last update: --:--:--</span>
+            </div>
+        </header>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="#" class="nav-link active" data-tab="dashboard">Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-tab="incidents">Incidents</a></li>
+                <li><a href="#" class="nav-link" data-tab="threats">Threats</a></li>
+                <li><a href="#" class="nav-link" data-tab="blocked">Blocked IPs</a></li>
+                <li><a href="#" class="nav-link" data-tab="alerts">Alerts</a></li>
+                <li><a href="#" class="nav-link" data-tab="reports">Reports</a></li>
+            </ul>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <section id="dashboard" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Threats</h3>
+                    <div class="stat-number" id="threats-count">0</div>
+                    <p class="stat-label">Detected</p>
+                </div>
+                <div class="stat-card danger">
+                    <h3>Blocked IPs</h3>
+                    <div class="stat-number" id="blocked-ips-count">0</div>
+                    <p class="stat-label">Active Blocks</p>
+                </div>
+                <div class="stat-card warning">
+                    <h3>Critical Alerts</h3>
+                    <div class="stat-number" id="critical-alerts">0</div>
+                    <p class="stat-label">Requires Action</p>
+                </div>
+                <div class="stat-card info">
+                    <h3>System Status</h3>
+                    <div class="stat-number" id="uptime">0h</div>
+                    <p class="stat-label">Uptime</p>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Threat Distribution</h3>
+                    <canvas id="threatChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Top Source IPs</h3>
+                    <div id="top-ips-list" class="ip-list"></div>
+                </div>
+            </div>
+
+            <div class="recent-section">
+                <h3>Recent Alerts</h3>
+                <div id="recent-alerts" class="alert-list"></div>
+            </div>
+        </section>
+
+        <!-- Incidents Tab -->
+        <section id="incidents" class="tab-content">
+            <div class="section-header">
+                <h2>Security Incidents</h2>
+                <input type="text" id="incident-search" placeholder="Search incidents...">
+            </div>
+            <div id="incidents-table" class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Type</th>
+                            <th>Severity</th>
+                            <th>Source IP</th>
+                            <th>Details</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="incidents-tbody">
+                        <tr><td colspan="6">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Threats Tab -->
+        <section id="threats" class="tab-content">
+            <div class="section-header">
+                <h2>Detected Threats</h2>
+                <select id="threat-severity-filter">
+                    <option value="">All Severities</option>
+                    <option value="LOW">Low</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="HIGH">High</option>
+                    <option value="CRITICAL">Critical</option>
+                </select>
+            </div>
+            <div id="threats-list" class="threat-list"></div>
+        </section>
+
+        <!-- Blocked IPs Tab -->
+        <section id="blocked" class="tab-content">
+            <div class="section-header">
+                <h2>Blocked IP Addresses</h2>
+            </div>
+            <div id="blocked-ips-list" class="ip-block-list"></div>
+        </section>
+
+        <!-- Alerts Tab -->
+        <section id="alerts" class="tab-content">
+            <div class="section-header">
+                <h2>Alert History</h2>
+                <button class="btn-primary" onclick="clearAlerts()">Clear History</button>
+            </div>
+            <div id="alerts-timeline" class="timeline"></div>
+        </section>
+
+        <!-- Reports Tab -->
+        <section id="reports" class="tab-content">
+            <div class="section-header">
+                <h2>Security Reports</h2>
+            </div>
+            <div class="reports-grid">
+                <div class="report-card">
+                    <h3>Daily Report</h3>
+                    <button class="btn-primary" onclick="generateReport('daily')">Generate</button>
+                    <button class="btn-secondary" onclick="exportReport('daily', 'pdf')">Export PDF</button>
+                </div>
+                <div class="report-card">
+                    <h3>Weekly Report</h3>
+                    <button class="btn-primary" onclick="generateReport('weekly')">Generate</button>
+                    <button class="btn-secondary" onclick="exportReport('weekly', 'pdf')">Export PDF</button>
+                </div>
+                <div class="report-card">
+                    <h3>Monthly Report</h3>
+                    <button class="btn-primary" onclick="generateReport('monthly')">Generate</button>
+                    <button class="btn-secondary" onclick="exportReport('monthly', 'pdf')">Export PDF</button>
+                </div>
+            </div>
+            <div id="report-content" class="report-content"></div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Network Attack Detection System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+# Flask Web Framework
+Flask==3.0.0
+Flask-MySQLdb==1.0.1
+Flask-SocketIO==5.3.4
+Flask-CORS==4.0.0
+Flask-JWT-Extended==4.5.2
+
+# Data Science & ML
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
+scipy==1.14.0
+
+# Real-time & Async
+python-socketio==5.10.0
+python-engineio==4.8.0
+redis==5.0.1
+celery==5.3.4
+
+# Database
+mysql-connector-python==8.2.0
+SQLAlchemy==2.0.23
+pymongo==4.6.0
+
+# Security & Auth
+PyJWT==2.8.1
+cryptography==41.0.7
+bcrypt==4.1.1
+
+# Data Visualization
+plotly==5.18.0
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# API Documentation
+Swagger==1.0.2
+flask-restx==0.5.1
+
+# Utilities
+python-dotenv==1.0.0
+schedule==1.2.0
+requests==2.31.0
+Werkzeug==3.0.1
+Jinja2==3.1.2
+python-dateutil==2.8.2
+pytz==2024.1
+
+# Monitoring & Logging
+python-json-logger==2.0.7
+sentry-sdk==1.39.1
+
+# Network Analysis
+scapy==2.5.0
+dnspython==2.4.2
+
+# Compliance & Reporting
+reportlab==4.0.9
+python-docx==0.8.11
+
+# Development
+python-dotenv==1.0.0
+pytest==7.4.3
+pytest-cov==4.1.0
